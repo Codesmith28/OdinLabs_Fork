@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: odinlabs-server
+    restart: always
+    env_file:
+      - server/.env
+    environment:
+      - PORT=8004
+      - MONGODB_URI=${MONGODB_URI}
+    depends_on:
+      - mongo
+    ports:
+      - "8004:8004"
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      args:
+        VITE_SERVER_URL: ${VITE_SERVER_URL}
+        VITE_SOCKET_URL: ${VITE_SOCKET_URL}
+        VITE_RAPIDAPI_URL: ${VITE_RAPIDAPI_URL}
+        VITE_RAPIDAPI_HOST: ${VITE_RAPIDAPI_HOST}
+    container_name: odinlabs-client
+    restart: always
+    env_file:
+      - client/.env
+    ports:
+      - "8080:8080"
+    depends_on:
+      - server
