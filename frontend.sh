@@ -15,5 +15,5 @@ if [ ! -d "$CHEATSHEETS_DIR" ]; then
 fi
 
 sudo cp -r "$CLIENT_DIST_DIR"/* "$WWW_DIR"/
-sudo cp "$CHEATSHEETS_DIR"/* "$WWW_DIR"/
+sudo cp -r "$CHEATSHEETS_DIR"/. "$WWW_DIR"/
 sudo systemctl restart nginx
