@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Basics</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 10px;
+            margin-top: -10px;
+        }
+
+        h2 {
+            color: #222;
+            margin-top: 20px;
+        }
+
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    </style>
+    <link rel="stylesheet" href="./vscode-light.min.css">
+</head>
+
+<body>
+    <h1>Linked List</h1>
+
+    <h2>Java</h2>
+    <pre>
+        <code class="language-java">
+    /**
+    * Definition for singly-linked list.
+    * public class ListNode {
+    * int val;
+    * ListNode next;
+    * ListNode() {}
+    * ListNode(int val) { this.val = val; }
+    * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+    * }
+    */
+    // Using the ListNode definition
+    ListNode node2 = new ListNode(20); // create node with value 20
+    ListNode node1 = new ListNode(10, node2); // create node with value 10, next points to node2
+
+    // Accessing values
+    int val1 = node1.val; // 10
+    ListNode next1 = node1.next; // node2
+    int val2 = next1.val; // 20
+        </code>
+    </pre>
+
+    <h2>C++</h2>
+    <pre>
+        <code class="language-cpp">
+    /**
+    * Definition for singly-linked list.
+    * struct ListNode {
+    * int val;
+    * ListNode *next;
+    * ListNode() : val(0), next(nullptr) {}
+    * ListNode(int x) : val(x), next(nullptr) {}
+    * ListNode(int x, ListNode *next) : val(x), next(next) {}
+    * };
+    */
+    // Using the ListNode definition
+    ListNode* node2 = new ListNode(20); // create node with value 20
+    ListNode* node1 = new ListNode(10, node2); // create node with value 10, next points to node2
+
+    // Accessing values
+    int val1 = node1->val; // 10
+    ListNode* next1 = node1->next; // node2
+    int val2 = next1->val; // 20
+        </code>
+    </pre>
+
+    <h2>Python</h2>
+    <pre>
+        <code class="language-python">
+    # Definition for singly-linked list.
+    # class ListNode(object):
+    # def __init__(self, val=0, next=None):
+    # self.val = val
+    # self.next = next
+    # Using the ListNode definition
+    node2 = ListNode(20) # create node with value 20
+    node1 = ListNode(10, node2) # create node with value 10, next points to node2
+
+    # Accessing values
+    val1 = node1.val # 10
+    next1 = node1.next # node2
+    val2 = next1.val # 20
+        </code>
+    </pre>
+
+    <hr>
+
+    <h1>Stack</h1>
+
+    <h2>Java</h2>
+    <pre>
+        <code class="language-java">
+    // Using the Stack class from java.util
+    Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();
+    stack.push(10); // push 10
+    stack.push(20); // push 20
+    int top = stack.peek(); // 20
+    int popped = stack.pop(); // 20
+    boolean isEmpty = stack.isEmpty(); // false
+    int size = stack.size(); // 1
+        </code>
+    </pre>
+
+    <h2>C++</h2>
+    <pre>
+        <code class="language-cpp">
+    // Using the stack container from &lt;stack&gt;
+    #include &lt;stack&gt;
+    using namespace std;
+    stack&lt;int&gt; s;
+    s.push(10); // push 10
+    s.push(20); // push 20
+    int top = s.top(); // 20
+    s.pop(); // removes 20
+    bool isEmpty = s.empty(); // false
+    int size = s.size(); // 1
+        </code>
+    </pre>
+
+    <h2>Python</h2>
+    <pre>
+        <code class="language-python">
+    # Using list as a stack
+    stack = []
+    stack.append(10) # push 10
+    stack.append(20) # push 20
+    top = stack[-1] # 20
+    popped = stack.pop() # 20
+    isEmpty = not stack # false
+    size = len(stack) # 1
+        </code>
+    </pre>
+
+    <script src="./highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
