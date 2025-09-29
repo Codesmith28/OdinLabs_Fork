@@ -14,7 +14,7 @@ const corsOptions = {
 		if (
 			!origin ||
 			origin.startsWith("http://localhost") ||
-			origin.startsWith("http://10.20.10.111")
+			origin.startsWith(`http://${process.env.IP_ADDRESS}`)
 		) {
 			// Allow requests from any localhost origin or without origin (like Postman)
 			callback(null, true);
