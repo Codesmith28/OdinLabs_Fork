@@ -28,7 +28,7 @@ class JudgeController {
                 "source_code": sourceCode,
                 "stdin": testCase.input,
                 "expected_output": testCase.expectedOutput,
-                "cpu_time_limit": (languageId === 62) ? 2.5 : 1.0,
+                "cpu_time_limit": (languageId === 62) ? 2.5 : 2.0,
             }));
 
             const submissionString = JSON.stringify(
