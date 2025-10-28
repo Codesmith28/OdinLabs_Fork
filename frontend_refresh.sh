@@ -1,6 +1,6 @@
 # Define source and destination directories
-CLIENT_DIST_DIR="${CLIENT_DIST_DIR:-$HOME/OdinLabsRepo/OdinLabs/client/dist}"
-CHEATSHEETS_DIR="${CHEATSHEETS_DIR:-$HOME/OdinLabsRepo/cheatsheets}"
+CLIENT_DIST_DIR="${CLIENT_DIST_DIR:-$HOME/OdinLabsRepo/OdinLabs_Fork/client/dist}"
+CHEATSHEETS_DIR="${CHEATSHEETS_DIR:-$HOME/OdinLabsRepo/OdinLabs_Fork/cheatsheets}"
 WWW_DIR="${WWW_DIR:-/var/www/html}"
 
 # Check if source directories exist before copying
