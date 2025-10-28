@@ -27,8 +27,8 @@ const corsOptions = {
 };
 
 // Apply CORS middleware
-// app.use(cors(corsOptions));
-app.use(cors()); // Temporarily allow all origins
+app.use(cors(corsOptions));
+// app.use(cors()); // Temporarily allow all origins
 
 // Other middleware
 app.use(express.json({ limit: "256kb" })); // Limit the size of JSON payloads
