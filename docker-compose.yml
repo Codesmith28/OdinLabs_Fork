@@ -9,8 +9,5 @@ services:
       - server/.env
     environment:
       - PORT=8004
-      - MONGODB_URI=${MONGODB_URI}
     ports:
       - "8004:8004"
-
-
