@@ -100,7 +100,6 @@ export const DEFAULT_JAVA_TEMPLATE = `
 class Solution {
     public void solve() {
         // Write your code here
-        System.out.println("Hello, World!");
     }
 }
 
@@ -172,7 +171,6 @@ export const DEFAULT_PYTHON_TEMPLATE = `# # -----------------------------
 class Solution:
     def solve(self):
         # Write your code here
-        print("Hello, World!")
 
 
 # DO NOT REMOVE THIS:
