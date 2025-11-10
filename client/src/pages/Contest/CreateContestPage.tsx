@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -21,11 +21,26 @@ export interface Contest {
 }
 
 const CreateContestPage: React.FC = () => {
-	const { register, handleSubmit, control, reset } = useForm<Contest>();
+	const { register, handleSubmit, control, reset, setValue } = useForm<Contest>();
 	const [problems, setProblems] = useState<number[]>([]);
 	const [message, setMessage] = useState("");
 	const [errorModalOpen, setErrorModalOpen] = useState(false);
 	const [successModalOpen, setSuccessModalOpen] = useState(false);
+
+	useEffect(() => {
+		// Generate a unique contest ID in DATEMONTHYEARHOURMINUTESECOND format with milliseconds for uniqueness
+		const now = new Date();
+		const year = now.getFullYear();
+		const month = String(now.getMonth() + 1).padStart(2, '0');
+		const day = String(now.getDate()).padStart(2, '0');
+		const hour = String(now.getHours()).padStart(2, '0');
+		const minute = String(now.getMinutes()).padStart(2, '0');
+		const second = String(now.getSeconds()).padStart(2, '0');
+		const millisecond = String(now.getMilliseconds()).padStart(3, '0');
+		
+		const generatedId = `${day}${month}${year}${hour}${minute}${second}${millisecond}`;
+		setValue('contestId', Number(generatedId));
+	}, [setValue]);
 
 	// Convert local date to UTC
 	const convertToUTC = (date: Date) => {
@@ -89,8 +104,9 @@ const CreateContestPage: React.FC = () => {
 								{...register("contestId", { required: true })}
 								type="number"
 								id="contestId"
-								placeholder="Enter contest ID"
-								className="w-full px-3 py-2 border-2 text-basecolor border-gray-300 bg-white rounded-md"
+								readOnly
+								className="w-full px-3 py-2 border-2 text-basecolor border-gray-300 bg-gray-100 rounded-md cursor-not-allowed"
+								placeholder="Auto-generated ID"
 							/>
 						</div>
 
