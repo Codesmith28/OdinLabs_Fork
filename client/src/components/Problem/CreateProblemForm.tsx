@@ -1,6 +1,6 @@
 // src/components/Problems/CreateProblemForm.tsx
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReactQuill from "react-quill"; // Import react-quill
 import "react-quill/dist/quill.snow.css"; // Import react-quill styles
 import { Testcase } from "../../types/problems";
@@ -11,6 +11,14 @@ import CodeEditorInput from "./CodeEditorInput"; // Updated to use CodeEditorWin
 import ErrorModal from "../../components/Utils/ErrorModal";
 import SuccessModal from "../../components/Utils/SuccessModal";
 import { problemService } from "../../api/problemService";
+import {
+	DEFAULT_CPP_TEMPLATE,
+	DEFAULT_CPP_DRIVER,
+	DEFAULT_JAVA_TEMPLATE,
+	DEFAULT_JAVA_DRIVER,
+	DEFAULT_PYTHON_TEMPLATE,
+	DEFAULT_PYTHON_DRIVER,
+} from "../../constants/defaultCodes";
 
 const CreateProblemForm = () => {
 	const [problemId, setProblemId] = useState("");
@@ -25,16 +33,31 @@ const CreateProblemForm = () => {
 	const [problemNote, setProblemNote] = useState("");
 	const [problemConstraints, setProblemConstraints] = useState("");
 	const [problemTestcases, setProblemTestcases] = useState<Testcase[]>([]);
-	const [problemCppTemplate, setProblemCppTemplate] = useState("");
-	const [problemCppDriverCode, setProblemCppDriverCode] = useState("");
-	const [problemJavaTemplate, setProblemJavaTemplate] = useState("");
-	const [problemJavaDriverCode, setProblemJavaDriverCode] = useState("");
-	const [problemPythonTemplate, setProblemPythonTemplate] = useState("");
-	const [problemPythonDriverCode, setProblemPythonDriverCode] = useState("");
+	const [problemCppTemplate, setProblemCppTemplate] = useState(DEFAULT_CPP_TEMPLATE);
+	const [problemCppDriverCode, setProblemCppDriverCode] = useState(DEFAULT_CPP_DRIVER);
+	const [problemJavaTemplate, setProblemJavaTemplate] = useState(DEFAULT_JAVA_TEMPLATE);
+	const [problemJavaDriverCode, setProblemJavaDriverCode] = useState(DEFAULT_JAVA_DRIVER);
+	const [problemPythonTemplate, setProblemPythonTemplate] = useState(DEFAULT_PYTHON_TEMPLATE);
+	const [problemPythonDriverCode, setProblemPythonDriverCode] = useState(DEFAULT_PYTHON_DRIVER);
 	const [problemEditorial, setProblemEditorial] = useState("");
 	const [message, setMessage] = useState("");
 	const [errorModalOpen, setErrorModalOpen] = useState(false);
 	const [successModalOpen, setSuccessModalOpen] = useState(false);
+
+	useEffect(() => {
+		// Generate a unique problem ID in DATEMONTHYEARHOURMINUTESECOND format with milliseconds for uniqueness
+		const now = new Date();
+		const year = now.getFullYear();
+		const month = String(now.getMonth() + 1).padStart(2, '0');
+		const day = String(now.getDate()).padStart(2, '0');
+		const hour = String(now.getHours()).padStart(2, '0');
+		const minute = String(now.getMinutes()).padStart(2, '0');
+		const second = String(now.getSeconds()).padStart(2, '0');
+		const millisecond = String(now.getMilliseconds()).padStart(3, '0');
+		
+		const generatedId = `${day}${month}${year}${hour}${minute}${second}${millisecond}`;
+		setProblemId(generatedId);
+	}, []);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -103,9 +126,9 @@ const CreateProblemForm = () => {
 					<input
 						type="text"
 						value={problemId}
-						onChange={(e) => setProblemId(e.target.value)}
-						className="border bg-white rounded-md p-2 text-lg"
-						placeholder="Enter the problem ID here..."
+						readOnly
+						className="border bg-gray-100 rounded-md p-2 text-lg cursor-not-allowed"
+						placeholder="Auto-generated ID"
 					/>
 				</div>
 				{/* Problem Title */}
