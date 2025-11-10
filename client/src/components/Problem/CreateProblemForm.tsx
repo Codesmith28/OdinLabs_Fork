@@ -1,6 +1,6 @@
 // src/components/Problems/CreateProblemForm.tsx
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReactQuill from "react-quill"; // Import react-quill
 import "react-quill/dist/quill.snow.css"; // Import react-quill styles
 import { Testcase } from "../../types/problems";
@@ -43,6 +43,21 @@ const CreateProblemForm = () => {
 	const [message, setMessage] = useState("");
 	const [errorModalOpen, setErrorModalOpen] = useState(false);
 	const [successModalOpen, setSuccessModalOpen] = useState(false);
+
+	useEffect(() => {
+		// Generate a unique problem ID in DATEMONTHYEARHOURMINUTESECOND format with milliseconds for uniqueness
+		const now = new Date();
+		const year = now.getFullYear();
+		const month = String(now.getMonth() + 1).padStart(2, '0');
+		const day = String(now.getDate()).padStart(2, '0');
+		const hour = String(now.getHours()).padStart(2, '0');
+		const minute = String(now.getMinutes()).padStart(2, '0');
+		const second = String(now.getSeconds()).padStart(2, '0');
+		const millisecond = String(now.getMilliseconds()).padStart(3, '0');
+		
+		const generatedId = `${day}${month}${year}${hour}${minute}${second}${millisecond}`;
+		setProblemId(generatedId);
+	}, []);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -111,9 +126,9 @@ const CreateProblemForm = () => {
 					<input
 						type="text"
 						value={problemId}
-						onChange={(e) => setProblemId(e.target.value)}
-						className="border bg-white rounded-md p-2 text-lg"
-						placeholder="Enter the problem ID here..."
+						readOnly
+						className="border bg-gray-100 rounded-md p-2 text-lg cursor-not-allowed"
+						placeholder="Auto-generated ID"
 					/>
 				</div>
 				{/* Problem Title */}
