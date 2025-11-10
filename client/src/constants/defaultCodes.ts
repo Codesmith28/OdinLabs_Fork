@@ -6,35 +6,35 @@ export const DEFAULT_CPP_TEMPLATE = `// #include <bits/stdc++.h>
 // // Basic Linked List Node
 // // -----------------------------
 // struct ListNode {
-//         int val;
-//         ListNode *next;
-//         ListNode(int x) : val(x), next(nullptr) {
-//         }
+//     int val;
+//     ListNode *next;
+//     ListNode(int x) : val(x), next(nullptr) {}
 // };
 
 // // -----------------------------
 // // Basic Binary Tree Node
 // // -----------------------------
 // struct TreeNode {
-//         int val;
-//         TreeNode *left;
-//         TreeNode *right;
-//         TreeNode(int x) : val(x), left(nullptr), right(nullptr) {
-//         }
+//     int val;
+//     TreeNode *left;
+//     TreeNode *right;
+//     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
 // };
 
 class Solution {
 public:
-    void solve( ) {
+    void solve() {
         // Write your code here
+        cout << "Hello, World!" << endl;
     }
 };
 
-// int main( ) {
-//         Solution sol = Solution();
-//         sol.solve();
-//         return 0;
-// }
+// DO NOT REMOVE THIS
+int _run_main() {
+    Solution sol;
+    sol.solve();
+    return 0;
+}
 `;
 
 export const DEFAULT_CPP_DRIVER = `#include <bits/stdc++.h>
@@ -43,40 +43,31 @@ using namespace std;
 // -----------------------------
 // Basic Linked List Node
 // -----------------------------
-// struct ListNode {
-//         int val;
-//         ListNode *next;
-//         ListNode(int x) : val(x), next(nullptr) {
-//         }
-// };
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(nullptr) {}
+};
 
 // -----------------------------
 // Basic Binary Tree Node
 // -----------------------------
-// struct TreeNode {
-//         int val;
-//         TreeNode *left;
-//         TreeNode *right;
-//         TreeNode(int x) : val(x), left(nullptr), right(nullptr) {
-//         }
-// };
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
 
-// class Solution {
-// public:
-//     void solve( ) {
-//         // Write your code here
-//     }
-// };
+// Forward declaration of Solution (defined in template)
+int _run_main();
 
-int main( ) {
-        Solution sol = Solution();
-        sol.solve();
-        return 0;
-}
-`;
+int main() {
+    // Call the function defined later, after template code is appended
+    return _run_main();
+}`;
 
-export const DEFAULT_JAVA_TEMPLATE = `
-// import java.util.*;
+export const DEFAULT_JAVA_TEMPLATE = `// import java.util.*;
 
 // // -----------------------------
 // // Basic Linked List Node
@@ -102,13 +93,6 @@ class Solution {
         // Write your code here
     }
 }
-
-// public class Main {
-//     public static void main(String[] args) {
-//         Solution sol = new Solution();
-//         sol.solve();
-//     }
-// }
 `;
 
 export const DEFAULT_JAVA_DRIVER = `import java.util.*;
@@ -147,8 +131,7 @@ public class Main {
         Solution sol = new Solution();
         sol.solve();
     }
-}
-`;
+}`;
 
 export const DEFAULT_PYTHON_TEMPLATE = `# # -----------------------------
 # # Basic Linked List Node
@@ -168,16 +151,8 @@ export const DEFAULT_PYTHON_TEMPLATE = `# # -----------------------------
 #         self.right = right
 
 
-class Solution:
-    def solve(self):
-        # Write your code here
-
-
-# DO NOT REMOVE THIS:
-main()
-# if __name__ == "__main__":
-#     sol = Solution()
-#     sol.solve()
+def solve():
+    # Write your code here
 `;
 
 export const DEFAULT_PYTHON_DRIVER = `# -----------------------------
@@ -198,13 +173,9 @@ class TreeNode:
         self.left = left
         self.right = right
 
-
-class Solution:  # type: ignore[reportRedeclaration]
-    def solve(self):
-        pass
-
-
 def main():
-    sol = Solution()
-    sol.solve()
+    solve()
+
+if __name__ == "__main__":
+    main()
 `;
