@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Navbar from "../../components/Utils/Navbar";
 import ErrorModal from "../../components/Utils/ErrorModal";
@@ -12,11 +12,26 @@ import { Assignment } from "../../types/assignment";
 import { assignmentService } from "../../api/assignmentService";
 
 const CreateAssignmentPage = () => {
-	const { register, handleSubmit, control, reset } = useForm<Assignment>();
+	const { register, handleSubmit, control, reset, setValue } = useForm<Assignment>();
 	const [message, setMessage] = useState<string>("");
 	const [errorModalOpen, setErrorModalOpen] = useState<boolean>(false);
 	const [successModalOpen, setSuccessModalOpen] = useState<boolean>(false);
 	const [problems, setProblems] = useState<number[]>([]);
+
+	useEffect(() => {
+		// Generate a unique assignment ID in DATEMONTHYEARHOURMINUTESECOND format with milliseconds for uniqueness
+		const now = new Date();
+		const year = now.getFullYear();
+		const month = String(now.getMonth() + 1).padStart(2, '0');
+		const day = String(now.getDate()).padStart(2, '0');
+		const hour = String(now.getHours()).padStart(2, '0');
+		const minute = String(now.getMinutes()).padStart(2, '0');
+		const second = String(now.getSeconds()).padStart(2, '0');
+		const millisecond = String(now.getMilliseconds()).padStart(3, '0');
+		
+		const generatedId = `${day}${month}${year}${hour}${minute}${second}${millisecond}`;
+		setValue('assignmentId', Number(generatedId));
+	}, [setValue]);
 
 	// Handle the creation of an assignment
 	const handleCreateAssignmentClick = async (data: any) => {
@@ -89,10 +104,11 @@ const CreateAssignmentPage = () => {
 							</label>
 							<input
 								{...register("assignmentId", { required: true })}
-								type="text"
+								type="number"
 								id="assignmentId"
-								placeholder="Enter assignment ID"
-								className="w-full px-3 py-2 border-2 border-gray-300 text-basecolor bg-white rounded-md"
+								readOnly
+								className="w-full px-3 py-2 border-2 border-gray-300 text-basecolor bg-gray-100 rounded-md cursor-not-allowed"
+								placeholder="Auto-generated ID"
 							/>
 						</div>
 						<div className="mb-4">
